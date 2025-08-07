@@ -17,7 +17,7 @@ It includes:
 - [x] VPC created
 - [x] Subnets configured
 - [x] Internet + NAT Gateway set up
-- [ ] EC2 launched with IAM role
+- [x] EC2 launched with IAM role
 - [ ] RDS encrypted with KMS
 - [ ] CloudTrail and Config enabled
 - [ ] WAF + Security Hub configured
@@ -37,7 +37,7 @@ It includes:
   - Public → IGW
   - Private → NAT GW
 
- **Screenshots:** (step by step)
+ ### Screenshots(step by step)
  
 | Step | Screenshot |
 |------|------------|
@@ -48,3 +48,28 @@ It includes:
 | ✅ 5. Public Route Table | ![](screenshots/route-table-public.png) |
 | ✅ 6. Private Route Table | ![](screenshots/route-table-private.png) |
 
+
+## Step 2 – EC2 in Private Subnet with IAM Role Setup
+
+In this step, I launched an Amazon EC2 instance into a **private subnet** to simulate an internal application server that is **not directly accessible from the internet**. The instance is designed to retrieve data securely from AWS services like S3 without exposing sensitive workloads.
+
+To follow the principle of **least privilege**, I created a custom **IAM role** with **AmazonS3ReadOnlyAccess** and attached it to the EC2 instance. This allows the instance to access S3 buckets without needing access keys or internet access.
+
+### Key Security Features:
+- No public IP assigned (private by design)
+- Access to the internet is routed through a **NAT Gateway**
+- IAM role enforces **secure access to AWS services** (e.g., S3) without hardcoding credentials
+
+### Screenshots:
+| Step | Screenshot |
+|------|------------|
+| ✅ IAM Role Created | ![](screenshots/iam-role-ec2-created.png) |
+| ✅ EC2 in Private Subnet (Launch Config) | ![](screenshots/ec2-private-subnet-config.png) |
+| ✅ EC2 Instance Details (Private) | ![](screenshots/ec2-private-instance-details.png) |
+
+
+This step aligns with ISO/IEC 27001 control objectives such as:
+
+- A.9.1.2: Access to networks and network services
+- A.9.2.1: User access provisioning
+- A.9.4.1: Information access restriction
