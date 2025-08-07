@@ -15,8 +15,8 @@ It includes:
 
 ## Project Progress (Live Tracking)
 - [x] VPC created
-- [ ] Subnets configured
-- [ ] Internet + NAT Gateway set up
+- [x] Subnets configured
+- [x] Internet + NAT Gateway set up
 - [ ] EC2 launched with IAM role
 - [ ] RDS encrypted with KMS
 - [ ] CloudTrail and Config enabled
@@ -37,4 +37,14 @@ It includes:
   - Public → IGW
   - Private → NAT GW
 
- **Screenshots:**
+ **Screenshots:** (step by step)
+ 
+| Step | Screenshot |
+|------|------------|
+| ✅ 1. VPC Created | ![](screenshots/vpc-created.png) |
+| ✅ 2. Subnets Configured | ![](screenshots/subnet-list.png) |
+| ✅ 3. Internet Gateway Attached | ![](screenshots/internet-gateway-config.png) |
+| ✅ 4. NAT Gateway Created | ![](screenshots/nat-gateway-config.png) |
+| ✅ 5. Public Route Table | ![](screenshots/route-table-public.png) |
+| ✅ 6. Private Route Table | ![](screenshots/route-table-private.png) |
+
