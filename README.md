@@ -101,7 +101,7 @@ In this step, I deployed an Amazon RDS MySQL database in a **private subnet** wi
 
 ---
 
-## 🔐 Step 4A – CloudTrail (Multi-Region, SSE-KMS, Integrity Validation, CW Logs)
+## Step 4A – CloudTrail (Multi-Region, SSE-KMS, Integrity Validation, CW Logs)
 
 In this step, I enabled **AWS CloudTrail** to capture and store all management events across all regions, with log files encrypted using a **customer-managed KMS key** and **Log File Validation** enabled for tamper detection.  
 Logs are delivered to an **S3 bucket** with secure bucket policies, and also streamed in near-real time to **CloudWatch Logs** for monitoring and analysis.
@@ -125,7 +125,7 @@ Logs are delivered to an **S3 bucket** with secure bucket policies, and also str
 
 ---
 
-## 📂 Appendix – Additional Compliance Proofs
+## Appendix – Additional Compliance Proofs
 
 These additional screenshots verify that the CloudTrail logging configuration meets **ISO/IEC 27001:2022** and other compliance standards for secure log storage and access control.
 
