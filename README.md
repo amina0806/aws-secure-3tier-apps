@@ -97,4 +97,43 @@ In this step, I deployed an Amazon RDS MySQL database in a **private subnet** wi
 **This step aligns with ISO/IEC 27001 control objectives such as:**
 - **A.10.1:** Cryptographic controls — encryption applied to protect information at rest  
 - **A.12.3.1:** Information backup — ensuring backups are protected from unauthorized access  
-- **A.13.1.1:** Network controls — restricting database access to authorized internal resources only  
+- **A.13.1.1:** Network controls — restricting database access to authorized internal resources only
+
+---
+
+## 🔐 Step 4A – CloudTrail (Multi-Region, SSE-KMS, Integrity Validation, CW Logs)
+
+In this step, I enabled **AWS CloudTrail** to capture and store all management events across all regions, with log files encrypted using a **customer-managed KMS key** and **Log File Validation** enabled for tamper detection.  
+Logs are delivered to an **S3 bucket** with secure bucket policies, and also streamed in near-real time to **CloudWatch Logs** for monitoring and analysis.
+
+### Key Security Features:
+- **Multi-Region trail** *(default in 2025 console)* – captures events from all AWS regions
+- **SSE-KMS encryption** with a project-specific CMK alias (`alias/ct-logs`)
+- **Log File Validation** to detect any modification of log files
+- **Secure bucket policy** allowing only CloudTrail to write logs
+- **CloudWatch Logs integration** with a dedicated log group and IAM role for delivery
+
+### Screenshots:
+
+| Step | Screenshot |
+|------|------------|
+| ✅ Create Trail – General | ![](screenshots/cloudtrail-create-trail-general.png) |
+| ✅ S3 + KMS Settings | ![](screenshots/cloudtrail-s3-and-kms-settings.png) |
+| ✅ Log File Validation Enabled | ![](screenshots/cloudtrail-log-file-validation.png) |
+| ✅ CloudWatch Logs Integration | ![](screenshots/cloudtrail-cloudwatch-logs.png) |
+| ✅ Event History Showing CreateTrail Event | ![](screenshots/cloudtrail-event-history.png) |
+
+---
+
+## 📂 Appendix – Additional Compliance Proofs
+
+These additional screenshots verify that the CloudTrail logging configuration meets **ISO/IEC 27001:2022** and other compliance standards for secure log storage and access control.
+
+| Proof | Screenshot |
+|-------|------------|
+| Bucket Policy allowing CloudTrail to write logs securely | ![](screenshots/cloudtrail-bucket-policy.png) |
+| Event Detail showing request metadata and resources affected | ![](screenshots/cloudtrail-event-detail.png) |
+| Bucket Permissions Summary confirming Block Public Access is ON | ![](screenshots/cloudtrail-bucket-permissions-summary.png) |
+
+
+
