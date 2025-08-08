@@ -18,7 +18,7 @@ It includes:
 - [x] Subnets configured
 - [x] Internet + NAT Gateway set up
 - [x] EC2 launched with IAM role
-- [ ] RDS encrypted with KMS
+- [x] RDS encrypted with KMS
 - [ ] CloudTrail and Config enabled
 - [ ] WAF + Security Hub configured
 - [ ] ISO 27001 mapping drafted
@@ -48,6 +48,7 @@ It includes:
 | ✅ 5. Public Route Table | ![](screenshots/route-table-public.png) |
 | ✅ 6. Private Route Table | ![](screenshots/route-table-private.png) |
 
+---
 
 ## Step 2 – EC2 in Private Subnet with IAM Role Setup
 
@@ -61,15 +62,39 @@ To follow the principle of **least privilege**, I created a custom **IAM role** 
 - IAM role enforces **secure access to AWS services** (e.g., S3) without hardcoding credentials
 
 ### Screenshots:
+
 | Step | Screenshot |
 |------|------------|
 | ✅ IAM Role Created | ![](screenshots/iam-role-ec2-created.png) |
 | ✅ EC2 in Private Subnet (Launch Config) | ![](screenshots/ec2-private-subnet-config.png) |
 | ✅ EC2 Instance Details (Private) | ![](screenshots/ec2-private-instance-details.png) |
 
+**This step aligns with ISO/IEC 27001 control objectives such as:**
+- **A.9.1.2:** Access to networks and network services
+- **A.9.2.1:** User access provisioning
+- **A.9.4.1:** Information access restriction
 
-This step aligns with ISO/IEC 27001 control objectives such as:
+---
 
-- A.9.1.2: Access to networks and network services
-- A.9.2.1: User access provisioning
-- A.9.4.1: Information access restriction
+## Step 3 – RDS Encrypted with AWS KMS
+
+In this step, I deployed an Amazon RDS MySQL database in a **private subnet** with **encryption at rest** enabled via AWS Key Management Service (KMS) to protect sensitive data and meet compliance standards. Encryption was enabled in the **Backup** section using the default AWS-managed KMS key (`aws/rds`), ensuring that storage, automated backups, snapshots, and read replicas are all encrypted automatically.
+
+### Key Security Features:
+- Deployed in **private subnets** (no public access) within the custom VPC  
+- **Encryption at rest** enabled via AWS KMS (`aws/rds`)  
+- Automated backups encrypted with the same KMS key  
+- Access restricted via VPC security groups to authorized application servers only  
+
+### Screenshots:
+
+| Step | Screenshot |
+|------|------------|
+| ✅ Encryption Enabled in Backup Section | ![](screenshots/rds-encryption-kms.png) |
+| ✅ Final DB Configuration Showing Encryption Active | ![](screenshots/rds-final-details.png) |
+
+
+**This step aligns with ISO/IEC 27001 control objectives such as:**
+- **A.10.1:** Cryptographic controls — encryption applied to protect information at rest  
+- **A.12.3.1:** Information backup — ensuring backups are protected from unauthorized access  
+- **A.13.1.1:** Network controls — restricting database access to authorized internal resources only  
