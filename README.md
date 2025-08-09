@@ -19,7 +19,7 @@ It includes:
 - [x] Internet + NAT Gateway set up
 - [x] EC2 launched with IAM role
 - [x] RDS encrypted with KMS
-- [ ] CloudTrail and Config enabled
+- [x] CloudTrail and Config enabled
 - [ ] WAF + Security Hub configured
 - [ ] ISO 27001 mapping drafted
 
@@ -135,5 +135,45 @@ These additional screenshots verify that the CloudTrail logging configuration me
 | Event Detail showing request metadata and resources affected | ![](screenshots/cloudtrail-event-detail.png) |
 | Bucket Permissions Summary confirming Block Public Access is ON | ![](screenshots/cloudtrail-bucket-permissions-summary.png) |
 
+---
+
+## Step 4B – AWS Config (Continuous Recording & Compliance Rules)
+
+Enabled **AWS Config** to record all resource changes continuously, storing history in an **S3 bucket with SSE-KMS encryption**.  
+Deployed AWS Managed Config Rules to enforce encryption and logging best practices.
+
+### Key Features:
+- Continuous recording of all resources
+- SSE-KMS encryption (inherited from bucket default)
+- Automated compliance checks:
+  - CLOUD_TRAIL_ENABLED
+  - S3_BUCKET_PUBLIC_READ_PROHIBITED
+  - EBS_ENCRYPTION_BY_DEFAULT
+  - S3_BUCKET_SERVER_SIDE_ENCRYPTION_ENABLED
+
+### Screenshots:
+
+| Step | Screenshot |
+|------|------------|
+| ✅ S3 Bucket Encryption for Config Logs | ![](screenshots/s3-config-bucket-encryption.png) |
+| ✅ Config Delivery Channel | ![](screenshots/config-delivery-channel.png) |
+| ✅ Config Rules Added | ![](screenshots/config-rules-list.png) |
+| ✅ Compliance Dashboard | ![](screenshots/config-compliance-dashboard.png) |
+| ✅ Recording Active | ![](screenshots/config-recording-active.png) |
+| ✅ Initial Setup – Recording Page | ![](screenshots/config-setup-recording.png) |
+
+
+## Appendix – IAM Role (ISO 27001 Alignment)
+
+**Role:** `AWSConfigRole` – Grants AWS Config permission to write encrypted logs to S3 and publish to SNS.
+
+| ISO 27001 Control | Implementation |
+|-------------------|----------------|
+| A.8.16 Monitoring | Continuous recording via AWS Config |
+| A.12.4.1 Event Logging | Config logs all resource changes |
+| A.12.6.2 Restriction on Changes | Rule-based compliance checks |
+
+**Trust Policy:** Allows `config.amazonaws.com` to assume the role.  
+**Permissions:** Minimal S3 (PutObject), KMS (Encrypt/GenerateDataKey), SNS (Publish) for defined resources only.
 
 
