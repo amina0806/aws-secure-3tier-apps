@@ -151,7 +151,7 @@ Deployed AWS Managed Config Rules to enforce encryption and logging best practic
   - EBS_ENCRYPTION_BY_DEFAULT
   - S3_BUCKET_SERVER_SIDE_ENCRYPTION_ENABLED
 
-### Screenshots:
+### Screenshots:**
 
 | Step | Screenshot |
 |------|------------|
@@ -162,6 +162,7 @@ Deployed AWS Managed Config Rules to enforce encryption and logging best practic
 | ✅ Recording Active | ![](screenshots/config-recording-active.png) |
 | ✅ Initial Setup – Recording Page | ![](screenshots/config-setup-recording.png) |
 
+---
 
 ## Appendix – IAM Role (ISO 27001 Alignment)
 
