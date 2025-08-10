@@ -177,4 +177,37 @@ Deployed AWS Managed Config Rules to enforce encryption and logging best practic
 **Trust Policy:** Allows `config.amazonaws.com` to assume the role.  
 **Permissions:** Minimal S3 (PutObject), KMS (Encrypt/GenerateDataKey), SNS (Publish) for defined resources only.
 
+---
+
+##  Step 5A — AWS WAF + Firehose → S3 (Web Tier Protection & Logging)
+
+In this step, I configured AWS WAF to protect the web tier (ALB) using AWS Managed Rules and enabled logging via Amazon Data Firehose to an S3 bucket.
+
+**What I configured**
+- Regional Web ACL in `us-east-1`, associated to the **Application Load Balancer** (ALB).
+- AWS Managed Rule Groups (Action = Block):
+  - `AWS-AWSManagedRulesCommonRuleSet`
+  - `AWS-AWSManagedRulesKnownBadInputsRuleSet`
+  - `AWS-AWSManagedRulesAmazonIpReputationList`
+  - `AWS-AWSManagedRulesAnonymousIpList`
+  - *(Optional)* `AWS-AWSManagedRulesSQLiRuleSet`
+- WAF logging to Amazon Data Firehose delivery stream → S3 bucket for centralized log storage.
+- IAM roles auto-created by the wizard for WAF and Firehose.
+
+
+### ISO/IEC 27001 Mapping
+- **A.8.20 Network controls** – WAF filters malicious traffic before it reaches the app.
+- **A.8.21 Secure service configuration** – standardized managed rules for consistent protection.
+- **A.12.4 Logging & monitoring** – immutable WAF logs stored securely in S3 for audit purposes.
+- **A.8.16 Monitoring activities** – CloudWatch metrics per rule enabled.
+
+
+### Screenshots
+
+| Step | Screenshot |
+|------|------------|
+| ✅ Web ACL created & ALB associated | ![](screenshots/waf-create-web-acl.png) |
+| ✅ Managed rules selected | ![](screenshots/waf-add-managed-rules.png) |
+| ✅ Logging enabled to Firehose | ![](screenshots/waf-logging-firehose.png) |
+| ✅ WAF logs stored in S3 | ![](screenshots/waf-logs-s3.png) |
 
