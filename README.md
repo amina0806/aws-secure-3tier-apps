@@ -21,7 +21,7 @@ It includes:
 - [x] RDS encrypted with KMS
 - [x] CloudTrail and Config enabled
 - [x] WAF + Security Hub configured
-- [ ] ISO 27001 mapping drafted
+- [x] ISO 27001 mapping drafted
 
 ##  Step 1: VPC + Subnet Setup
 
@@ -254,3 +254,24 @@ Enable and configure **AWS Security Hub** to continuously monitor the AWS enviro
 Security Hub is now active, integrated with core AWS security services, and continuously monitoring the account against industry standards.
 
 ---
+
+## Compliance Mapping – ISO/IEC 27001:2022
+
+The following table maps implemented AWS security controls in this project to the relevant ISO/IEC 27001:2022 Annex A control objectives.
+
+Control mapping based on [AWS Compliance Documentation](https://aws.amazon.com/compliance/resources/) and ISO/IEC 27001:2022 Annex A controls.
+
+| AWS Service / Security Control | Description of Implementation | ISO/IEC 27001:2022 Annex A Control(s) |
+|--------------------------------|--------------------------------|----------------------------------------|
+| [Amazon VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) with Public & Private Subnets | Segregates web, application, and database tiers; limits exposure of sensitive resources. | **A.8.20** – Network security; **A.8.22** – Segregation in networks |
+| [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) + [NAT Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) | Secure internet access for public tier; controlled outbound-only access for private tier. | **A.8.20** – Network security |
+| [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) | Whitelist inbound/outbound traffic by port and protocol; principle of least privilege. | **A.8.20** – Network security; **A.8.21** – Network services security |
+| [AWS IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) (Least Privilege) | EC2 and RDS use roles granting only required permissions; no hardcoded credentials. | **A.8.2** – Privileged access rights; **A.5.15** – Access control |
+| [Amazon RDS Encryption with AWS KMS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html) | Encrypts database storage, automated backups, and snapshots. | **A.8.24** – Cryptographic controls; **A.8.28** – Secure disposal or re-use of equipment |
+| [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html) (All Regions) | Records all API calls for auditing and investigations. | **A.8.15** – Logging; **A.5.23** – Information security monitoring |
+| [AWS Config](https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html) | Tracks configuration changes; checks compliance against policies. | **A.8.9** – Configuration management; **A.5.23** – Information security monitoring |
+| [Amazon GuardDuty](https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html) | Detects anomalous or malicious activity (e.g., IAM credential abuse, reconnaissance). | **A.5.23** – Information security monitoring; **A.5.10** – Threat intelligence |
+| [AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html) | Protects web tier against common attacks (SQLi, XSS, OWASP Top 10). | **A.8.25** – Secure development lifecycle; **A.5.14** – Protection against malware |
+| [Amazon S3 SSE-KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html) | Encrypts static assets; enforces bucket policies and block public access. | **A.8.24** – Cryptographic controls; **A.5.14** – Protection against malware |
+| Private Subnet for [Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) | Removes direct internet exposure; access only from app tier. | **A.8.20** – Network security; **A.8.22** – Segregation in networks |
+
