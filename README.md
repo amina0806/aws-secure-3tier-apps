@@ -20,7 +20,7 @@ It includes:
 - [x] EC2 launched with IAM role
 - [x] RDS encrypted with KMS
 - [x] CloudTrail and Config enabled
-- [ ] WAF + Security Hub configured
+- [x] WAF + Security Hub configured
 - [ ] ISO 27001 mapping drafted
 
 ##  Step 1: VPC + Subnet Setup
@@ -211,3 +211,46 @@ In this step, I configured AWS WAF to protect the web tier (ALB) using AWS Manag
 | ✅ Logging enabled to Firehose | ![](screenshots/waf-logging-firehose.png) |
 | ✅ WAF logs stored in S3 | ![](screenshots/waf-logs-s3.png) |
 
+
+---
+
+## Step 5B – Security Hub Configuration
+
+### Goal
+Enable and configure **AWS Security Hub** to continuously monitor the AWS environment against security best practices and compliance benchmarks.
+
+### Steps Performed
+
+1. **Enable AWS Security Hub**  
+   - Navigated to **Security Hub → Settings → General**.  
+   - Enabled AWS Security Hub for the current region.  
+   - Cross-Region aggregation left unconfigured for this lab.
+
+2. **Enable Security Standards**  
+   - Opened **Security Hub CSPM → Security standards**.  
+   - Enabled:
+     - AWS Foundational Security Best Practices (FSBP) v1.0.0  
+     - CIS AWS Foundations Benchmark v1.2.0  
+   - Kept default control selections.
+
+3. **Confirm AWS Service Integrations**  
+   - Verified that **AWS Config** and **AWS CloudTrail** integrations show as **Connected**.  
+   - (Optional) Checked **GuardDuty** connection if enabled.
+
+4. **View Remediation Instructions**  
+   - Opened a control from the enabled standards.  
+   - Clicked **Remediation instructions** to view AWS documentation.
+
+### Screenshots (Step-by-Step)
+
+| Step | Screenshot |
+|------|------------|
+| ✅ Security Hub Enabled | ![](screenshots/security-hub-enable.png) |
+| ✅ Security Standards Enabled | ![](screenshots/security-hub-standards-enabled.png) |
+| ✅ Service Integrations Confirmed | ![](screenshots/security-hub-integrations-updated.png) |
+| ✅ Control Remediation Instructions | ![](screenshots/security-hub-remediation-link.png) |
+
+### ✅ Outcome
+Security Hub is now active, integrated with core AWS security services, and continuously monitoring the account against industry standards.
+
+---
