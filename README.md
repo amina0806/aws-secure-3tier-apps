@@ -283,6 +283,7 @@ This diagram shows the secure AWS 3-Tier web application architecture, including
 
 ![Secure 3-Tier Architecture](diagrams/aws-secure-3tier.png)
 
+
 ### Architecture Components
 1. AWS WAF – Filters inbound traffic (public subnet)
 2. Application Load Balancer – HTTPS termination & routing
