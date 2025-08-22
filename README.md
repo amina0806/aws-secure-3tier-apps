@@ -23,6 +23,29 @@ It includes:
 - [x] WAF + Security Hub configured
 - [x] ISO 27001 mapping drafted
 
+---
+
+## Architecture Overview
+
+This diagram shows the secure AWS 3-Tier web application architecture, including key security controls and ISO/IEC 27001:2022 mappings.
+
+![Secure 3-Tier Architecture](diagrams/aws-secure-3tier.png)
+
+
+### Architecture Components
+1. AWS WAF – Filters inbound traffic (public subnet)
+2. Application Load Balancer – HTTPS termination & routing
+3. Amazon EC2 App Tier – Private subnet, IAM role
+4. Amazon RDS – Encrypted with AWS KMS
+5. NAT Gateway – Outbound internet for private subnet
+6. Amazon S3 – SSE-KMS, Block Public Access
+7. AWS CloudTrail – Logs API activity to S3
+8. AWS Config – Tracks configuration changes
+9. Amazon GuardDuty – Threat detection
+10. Security Groups & NACLs – Control inbound/outbound traffic
+
+
+---
 ##  Step 1: VPC + Subnet Setup
 
 - Created custom VPC named `Secure3TierVPC`
@@ -274,25 +297,4 @@ Control mapping based on [AWS Compliance Documentation](https://aws.amazon.com/c
 | [AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html) | Protects web tier against common attacks (SQLi, XSS, OWASP Top 10). | **A.8.25** – Secure development lifecycle; **A.5.14** – Protection against malware |
 | [Amazon S3 SSE-KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html) | Encrypts static assets; enforces bucket policies and block public access. | **A.8.24** – Cryptographic controls; **A.5.14** – Protection against malware |
 | Private Subnet for [Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) | Removes direct internet exposure; access only from app tier. | **A.8.20** – Network security; **A.8.22** – Segregation in networks |
-
----
-
-## Architecture Overview
-
-This diagram shows the secure AWS 3-Tier web application architecture, including key security controls and ISO/IEC 27001:2022 mappings.
-
-![Secure 3-Tier Architecture](diagrams/aws-secure-3tier.png)
-
-
-### Architecture Components
-1. AWS WAF – Filters inbound traffic (public subnet)
-2. Application Load Balancer – HTTPS termination & routing
-3. Amazon EC2 App Tier – Private subnet, IAM role
-4. Amazon RDS – Encrypted with AWS KMS
-5. NAT Gateway – Outbound internet for private subnet
-6. Amazon S3 – SSE-KMS, Block Public Access
-7. AWS CloudTrail – Logs API activity to S3
-8. AWS Config – Tracks configuration changes
-9. Amazon GuardDuty – Threat detection
-10. Security Groups & NACLs – Control inbound/outbound traffic
 
