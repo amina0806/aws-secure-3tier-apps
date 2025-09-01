@@ -1,38 +1,16 @@
-# aws-secure-3tier-apps
-AWS 3-Tier Web App Architecture with Security Controls and ISO 27001 Mapping 
-
 # AWS Secure 3-Tier Application (Manual Console Project)
-This hands-on project builds and secures a 3-tier web application architecture using the AWS Console.
 
-It includes:
-- Secure VPC network setup
-- IAM least privilege roles
-- Encrypted RDS database
-- CloudTrail and Config logging
-- Threat detection with GuardDuty
-- WAF and S3 security
-- ISO/IEC 27001:2022 control mapping
+This portfolio project demonstrates how to **design, deploy, and harden** a 3-tier web application on AWS with built-in security and compliance alignment.  It combines **real AWS configurations** with **ISO/IEC 27001:2022 control mapping** to prove hands-on cloud security skills.
 
-## Project Progress (Live Tracking)
-- [x] VPC created
-- [x] Subnets configured
-- [x] Internet + NAT Gateway set up
-- [x] EC2 launched with IAM role
-- [x] RDS encrypted with KMS
-- [x] CloudTrail and Config enabled
-- [x] WAF + Security Hub configured
-- [x] ISO 27001 mapping drafted
-
----
-
-## Architecture Overview
+### Architecture Overview
 
 This diagram shows the secure AWS 3-Tier web application architecture, including key security controls and ISO/IEC 27001:2022 mappings.
 
 ![Secure 3-Tier Architecture](diagrams/aws-secure-3tier.png)
 
 
-### Architecture Components
+**Architecture Components**
+
 1. AWS WAF – Filters inbound traffic (public subnet)
 2. Application Load Balancer – HTTPS termination & routing
 3. Amazon EC2 App Tier – Private subnet, IAM role
@@ -43,6 +21,55 @@ This diagram shows the secure AWS 3-Tier web application architecture, including
 8. AWS Config – Tracks configuration changes
 9. Amazon GuardDuty – Threat detection
 10. Security Groups & NACLs – Control inbound/outbound traffic
+
+---
+
+## What This Project Shows
+
+- **Enterprise-grade VPC design** – private/public subnets, NAT, secure routing
+- **IAM least privilege** – scoped roles for app, DB, and admin access
+- **Data protection** – encrypted RDS, S3 with SSE-KMS, TLS-only policies
+- **Audit & monitoring** – CloudTrail, AWS Config, log validation
+- **Threat detection** – GuardDuty findings integrated with Security Hub
+- **Perimeter security** – AWS WAF, ALB logging, S3 block public access
+- **Compliance evidence** – ISO/IEC 27001:2022 Annex A controls mapped to AWS services
+
+---
+
+## Why It Matters
+
+This project is designed to **mirror real enterprise expectations**:
+- Recruiters and hiring managers see proof of **both technical depth (Terraform/AWS security)** and **governance awareness (ISO 27001 mapping)**.
+- The repo doubles as a **compliance portfolio artifact** — showing not only “how it works” but also *“how it proves security requirements are met.”*
+
+---
+
+## Evidence Included
+
+- **Screenshots** from AWS Console (VPC, CloudTrail, GuardDuty, etc.)
+- **ISO/IEC 27001 Annex A mapping table** with linked implementations
+- **Architecture diagram** of the secured 3-tier stack
+
+---
+
+## Key Outcomes
+
+By the end of this build you will see:
+- A **secure, production-style 3-tier app** (Web → App → DB)
+- End-to-end security controls tied directly to **global compliance standards**
+- A clear demonstration of **cloud security engineering capability**
+
+---
+
+## Project Progress (Live Tracking)
+- [x] VPC created
+- [x] Subnets configured
+- [x] Internet + NAT Gateway set up
+- [x] EC2 launched with IAM role
+- [x] RDS encrypted with KMS
+- [x] CloudTrail and Config enabled
+- [x] WAF + Security Hub configured
+- [x] ISO 27001 mapping drafted
 
 
 ---
@@ -60,8 +87,9 @@ This diagram shows the secure AWS 3-Tier web application architecture, including
   - Public → IGW
   - Private → NAT GW
 
+
  ### Screenshots(step by step)
- 
+
 | Step | Screenshot |
 |------|------------|
 | ✅ 1. VPC Created | ![](screenshots/vpc-created.png) |
@@ -104,10 +132,10 @@ To follow the principle of **least privilege**, I created a custom **IAM role** 
 In this step, I deployed an Amazon RDS MySQL database in a **private subnet** with **encryption at rest** enabled via AWS Key Management Service (KMS) to protect sensitive data and meet compliance standards. Encryption was enabled in the **Backup** section using the default AWS-managed KMS key (`aws/rds`), ensuring that storage, automated backups, snapshots, and read replicas are all encrypted automatically.
 
 ### Key Security Features:
-- Deployed in **private subnets** (no public access) within the custom VPC  
-- **Encryption at rest** enabled via AWS KMS (`aws/rds`)  
-- Automated backups encrypted with the same KMS key  
-- Access restricted via VPC security groups to authorized application servers only  
+- Deployed in **private subnets** (no public access) within the custom VPC
+- **Encryption at rest** enabled via AWS KMS (`aws/rds`)
+- Automated backups encrypted with the same KMS key
+- Access restricted via VPC security groups to authorized application servers only
 
 ### Screenshots:
 
@@ -118,15 +146,15 @@ In this step, I deployed an Amazon RDS MySQL database in a **private subnet** wi
 
 
 **This step aligns with ISO/IEC 27001 control objectives such as:**
-- **A.10.1:** Cryptographic controls — encryption applied to protect information at rest  
-- **A.12.3.1:** Information backup — ensuring backups are protected from unauthorized access  
+- **A.10.1:** Cryptographic controls — encryption applied to protect information at rest
+- **A.12.3.1:** Information backup — ensuring backups are protected from unauthorized access
 - **A.13.1.1:** Network controls — restricting database access to authorized internal resources only
 
 ---
 
 ## Step 4A – CloudTrail (Multi-Region, SSE-KMS, Integrity Validation, CW Logs)
 
-In this step, I enabled **AWS CloudTrail** to capture and store all management events across all regions, with log files encrypted using a **customer-managed KMS key** and **Log File Validation** enabled for tamper detection.  
+In this step, I enabled **AWS CloudTrail** to capture and store all management events across all regions, with log files encrypted using a **customer-managed KMS key** and **Log File Validation** enabled for tamper detection.
 Logs are delivered to an **S3 bucket** with secure bucket policies, and also streamed in near-real time to **CloudWatch Logs** for monitoring and analysis.
 
 ### Key Security Features:
@@ -162,7 +190,7 @@ These additional screenshots verify that the CloudTrail logging configuration me
 
 ## Step 4B – AWS Config (Continuous Recording & Compliance Rules)
 
-Enabled **AWS Config** to record all resource changes continuously, storing history in an **S3 bucket with SSE-KMS encryption**.  
+Enabled **AWS Config** to record all resource changes continuously, storing history in an **S3 bucket with SSE-KMS encryption**.
 Deployed AWS Managed Config Rules to enforce encryption and logging best practices.
 
 ### Key Features:
@@ -197,7 +225,7 @@ Deployed AWS Managed Config Rules to enforce encryption and logging best practic
 | A.12.4.1 Event Logging | Config logs all resource changes |
 | A.12.6.2 Restriction on Changes | Rule-based compliance checks |
 
-**Trust Policy:** Allows `config.amazonaws.com` to assume the role.  
+**Trust Policy:** Allows `config.amazonaws.com` to assume the role.
 **Permissions:** Minimal S3 (PutObject), KMS (Encrypt/GenerateDataKey), SNS (Publish) for defined resources only.
 
 ---
@@ -244,24 +272,24 @@ Enable and configure **AWS Security Hub** to continuously monitor the AWS enviro
 
 ### Steps Performed
 
-1. **Enable AWS Security Hub**  
-   - Navigated to **Security Hub → Settings → General**.  
-   - Enabled AWS Security Hub for the current region.  
+1. **Enable AWS Security Hub**
+   - Navigated to **Security Hub → Settings → General**.
+   - Enabled AWS Security Hub for the current region.
    - Cross-Region aggregation left unconfigured for this lab.
 
-2. **Enable Security Standards**  
-   - Opened **Security Hub CSPM → Security standards**.  
+2. **Enable Security Standards**
+   - Opened **Security Hub CSPM → Security standards**.
    - Enabled:
-     - AWS Foundational Security Best Practices (FSBP) v1.0.0  
-     - CIS AWS Foundations Benchmark v1.2.0  
+     - AWS Foundational Security Best Practices (FSBP) v1.0.0
+     - CIS AWS Foundations Benchmark v1.2.0
    - Kept default control selections.
 
-3. **Confirm AWS Service Integrations**  
-   - Verified that **AWS Config** and **AWS CloudTrail** integrations show as **Connected**.  
+3. **Confirm AWS Service Integrations**
+   - Verified that **AWS Config** and **AWS CloudTrail** integrations show as **Connected**.
    - (Optional) Checked **GuardDuty** connection if enabled.
 
-4. **View Remediation Instructions**  
-   - Opened a control from the enabled standards.  
+4. **View Remediation Instructions**
+   - Opened a control from the enabled standards.
    - Clicked **Remediation instructions** to view AWS documentation.
 
 ### Screenshots (Step-by-Step)
@@ -297,4 +325,3 @@ Control mapping based on [AWS Compliance Documentation](https://aws.amazon.com/c
 | [AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html) | Protects web tier against common attacks (SQLi, XSS, OWASP Top 10). | **A.8.25** – Secure development lifecycle; **A.5.14** – Protection against malware |
 | [Amazon S3 SSE-KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html) | Encrypts static assets; enforces bucket policies and block public access. | **A.8.24** – Cryptographic controls; **A.5.14** – Protection against malware |
 | Private Subnet for [Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) | Removes direct internet exposure; access only from app tier. | **A.8.20** – Network security; **A.8.22** – Segregation in networks |
-
