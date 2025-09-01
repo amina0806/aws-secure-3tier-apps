@@ -1,7 +1,5 @@
-.DS_Store
-# Ignore everything
-*
-
-# But not this file
 !README.md
 !.gitignore
+!docs/**
+!screenshots/**
+!diagrams/**
